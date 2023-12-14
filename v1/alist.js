@@ -90,6 +90,10 @@ export class Alist {
 	 * @return {object} 返回数据对象
 	 */
 	async getFileList(path = '', password = '', page = 1, perPage = 0, refresh = false) {
+		if (path) {
+			path = Helper.completeStart(path);
+			path = Helper.removeEnd(path);
+		}
 		return await this.request('/api/fs/list', {
 			path: path,
 			password: password,
@@ -107,6 +111,9 @@ export class Alist {
 	 * @return {object} 返回数据对象
 	 */
 	async getFileInfo(path = '', password = '') {
+		if (path) {
+			path = Helper.completeStart(path);
+		}
 		return await this.request('/api/fs/get', {
 			path: path,
 			password: password,
