@@ -20,8 +20,8 @@
 	artist-name="刘忙" 主播名称，缺省为空字符串
 	cover-path="/cover.png" 封面路径，缺省为空字符串
 	track-path="/track/0001-0500|/track/0501-0794" 轨道路径，多个可使用 | 分割，缺省为 /track
-	track-order="(.+)\..+" 音轨顺序，按正则表达式从文件名取，缺省为空字符串
-	track-name="(.+)\..+" 音轨名称，按正则表达式从文件名取，缺省为空字符串
+	track-order="(.*)\.[^.]+$" 音轨顺序，按正则表达式从文件名取，缺省为空字符串
+	track-name="(.*)\.[^.]+$" 音轨名称，按正则表达式从文件名取，缺省为空字符串
 	player-fixed="0" 播放器是否开启吸底模式，缺省为0
 	player-list-folded="0" 播放器列表是否默认折叠，缺省为0
 	player-list-max-height="300px" 播放器列表最大高度，缺省为300px
@@ -36,12 +36,12 @@
 		alist-url="http://zyk.wsd.cx:5244"
 		album-path="/有声小说/恐怖悬疑/鬼吹灯 第一部 精绝古城[艾宝良]"
 		album-password="ysxs"
-		album-name="鬼吹灯 第一部 精绝古城[艾宝良]"
+		album-name="鬼吹灯 第一部 精绝古城"
 		artist-name="艾宝良"
 		cover-path="/cover.jpeg"
 		track-path="/track"
-		track-order="(\d+).*"
-		track-name=""
+		track-order="(.*)\.[^.]+$"
+		track-name="(.*)\.[^.]+$"
 		player-fixed="0"
 		player-list-folded="0"
 		player-list-max-height="300px"
@@ -61,8 +61,8 @@
 		ysxs-artist-name="刘忙"
 		ysxs-cover-path="/cover.png"
 		ysxs-track-path="/track/0001-0500|/track/0501-0794"
-		ysxs-track-order="(\d+).*"
-		ysxs-track-name=""
+		ysxs-track-order="(.*)\.[^.]+$"
+		ysxs-track-name="(.*)\.[^.]+$"
 		ysxs-player-fixed="0"
 		ysxs-player-list-folded="0"
 		ysxs-player-list-max-height="300px"
