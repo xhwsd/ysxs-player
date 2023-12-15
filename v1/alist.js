@@ -158,7 +158,7 @@ export class Alist {
 	 * @param {Array<string>} names 文件名
 	 * @return {object} 返回数据对象
 	 */
-	async getFileInfo(srcDir, dstDir, names) {
+	async copy(srcDir, dstDir, names) {
 		if (srcDir) {
 			srcDir = Helper.completeStart(srcDir);
 		}
