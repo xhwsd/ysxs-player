@@ -1,4 +1,4 @@
-// Alist https://atlist-v3.apifox.cn/
+// Alist https://alist-v3.apifox.cn/
 // Fetch https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API
 
 import { Helper } from './helper.js';
@@ -49,6 +49,36 @@ export class Alist {
 		}
 		return response.data;
 	}
+
+	/**
+	 * 到文件下载地址
+	 * 
+	 * @param {string} path 路径
+	 * @param {string} name 名称
+	 * @param {string} sign 签名
+	 * @return {string} 下载地址
+	 */
+	toDownloadUrl(path, name, sign = '') {
+		// 网站/d/路径/文件名?sign=签名
+		let url = this.url + '/d/' + Helper.removeBorder(path) + '/' + Helper.removeStart(name);
+		if (sign) {
+			url += '?sign=' + sign;
+		}
+		return url;
+	}
+
+	/**
+	 * 取文件下载地址
+	 * 
+	 * @param {string} path 路径
+	 * @param {object} item 内容项目
+	 * @return {string} 下载地址
+	 */
+	getDownloadUrl(path, item) {
+		return this.toDownloadUrl(path, item.name, item.sign || '');
+	}
+
+	/* 接口 */
 
 	/**
 	 * 用户登录 - `/api/auth/login`
@@ -121,30 +151,24 @@ export class Alist {
 	}
 
 	/**
-	 * 到文件下载地址
+	 * 复制文件 - `/api/fs/copy`
 	 * 
-	 * @param {string} path 路径
-	 * @param {string} name 名称
-	 * @param {string} sign 签名
-	 * @return {string} 下载地址
+	 * @param {string} srcDir 源文件夹
+	 * @param {string} dstDir 目标文件夹
+	 * @param {Array<string>} names 文件名
+	 * @return {object} 返回数据对象
 	 */
-	toDownloadUrl(path, name, sign = '') {
-		// 网站/d/路径/文件名?sign=签名
-		let url = this.url + '/d/' + Helper.removeBorder(path) + '/' + Helper.removeStart(name);
-		if (sign) {
-			url += '?sign=' + sign;
+	async getFileInfo(srcDir, dstDir, names) {
+		if (srcDir) {
+			srcDir = Helper.completeStart(srcDir);
 		}
-		return url;
-	}
-
-	/**
-	 * 取文件下载地址
-	 * 
-	 * @param {string} path 路径
-	 * @param {object} item 内容项目
-	 * @return {string} 下载地址
-	 */
-	getDownloadUrl(path, item) {
-		return this.toDownloadUrl(path, item.name, item.sign || '');
+		if (dstDir) {
+			dstDir = Helper.completeStart(dstDir);
+		}
+		return await this.request('/api/fs/copy', {
+			src_dir: srcDir,
+			dst_dir: dstDir,
+			names: names
+		});
 	}
 }
